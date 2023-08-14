@@ -1,15 +1,19 @@
 <?php 
 
 include("../../config/db_connect.php");
-function random($panjang)
-{
-   $karakter = 'abcdefghijklmnopqrstuvwxyz1234567890';
-   $string = '';
-   for($i = 0; $i < $panjang; $i++) {
-   $pos = rand(0, strlen($karakter)-1);
-   $string .= $karakter{$pos};
-   }
-    return $string;
+function random_str(
+    int $length = 64,
+    string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+): string {
+    if ($length < 1) {
+        throw new \RangeException("Length must be a positive integer");
+    }
+    $pieces = [];
+    $max = mb_strlen($keyspace, '8bit') - 1;
+    for ($i = 0; $i < $length; ++$i) {
+        $pieces []= $keyspace[random_int(0, $max)];
+    }
+    return implode('', $pieces);
 };
 //if form is submitted
 if($_POST) {	
@@ -37,11 +41,11 @@ if($_POST) {
 	$kecamatan=$_POST['kecamatan'];
 	$kabupaten=$_POST['kabupaten'];
 	$provinsi=$_POST['provinsi'];
-	$id_pd1=random(8);
-	$id_pd2=random(4);
-	$id_pd3=random(4);
-	$id_pd4=random(4);
-	$id_pd5=random(12);
+	$id_pd1=random_str(8);
+	$id_pd2=random_str(4);
+	$id_pd3=random_str(4);
+	$id_pd4=random_str(4);
+	$id_pd5=random_str(12);
 	$id_pd=$id_pd1.'-'.$id_pd2.'-'.$id_pd3.'-'.$id_pd4.'-'.$id_pd5;
 	if(empty($nama) || empty($tanggal)){
 		$validator['success'] = false;
