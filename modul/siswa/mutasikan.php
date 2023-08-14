@@ -9,42 +9,42 @@ $rombel=$connect->query("SELECT * FROM penempatan where peserta_didik_id='$idp' 
 //hahahaha
 ?>
 <div class="modal-body">
-									<section class="card card-group">
-										<header class="card-header bg-primary w-100">
-
-											<div class="widget-profile-info">
-												<div class="profile-picture">
-													<img src="<?=base_url();?>images/siswa/<?=$siswa['avatar'];?>">
-												</div>
-												<div class="profile-info">
-													<h4 class="name font-weight-semibold"><?=$siswa['nama'];?></h4>
-													<h5 class="role"><?=$siswa['nis'];?> / <?=$siswa['nisn'];?></h5>
-													<div class="profile-footer">
-														<input type="hidden" class="form-control" name="siswa" value="<?=$idp;?>"/>
-																<input type="hidden" class="form-control" name="tapel" value="<?=$tapel;?>"/>
-																<input type="hidden" class="form-control" name="smt" value="<?=$smt;?>"/>
-																<?php 
-																$sql = "select * from jns_mutasi";
-																$query = $connect->query($sql);
-																?>
-																<select name="jenis" data-control="select2" data-dropdown-parent="#mutasikan" data-placeholder="Pilih Jenis Mutasi..." class="form-select form-select-solid">
-																	<?php while ($row = $query->fetch_assoc()) { ?>
-																	<option value="<?=$row['id_mutasi'];?>"><?=$row['nama_mutasi'];?></option>
-																	<?php } ?>
-																</select>
-													</div>
-												</div>
-											</div>
-
-										</header>
-									</section>
-									
+	<div class="row">
+		<div class="col-12">
+			<div class="rich-list-item p-0">
+				<div class="rich-list-prepend">
+					<div class="avatar avatar-circle avatar-lg">
+						<div class="avatar-display">
+							<img src="<?=base_url();?>images/siswa/<?=$siswa['avatar'];?>" alt="AI">
+						</div>
+					</div>
+				</div>
+				<div class="rich-list-content">
+					<h4 class="rich-list-title"><?=$siswa['nama'];?></h4>
+					<span class="rich-list-subtitle"><?=$siswa['nisn'];?></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 mt-2">
+			<input type="hidden" class="form-control" name="siswa" value="<?=$idp;?>"/>
+			<input type="hidden" class="form-control" name="tapel" value="<?=$tapel;?>"/>
+			<input type="hidden" class="form-control" name="smt" value="<?=$smt;?>"/>
+			<?php 
+			$sql = "select * from jns_mutasi";
+			$query = $connect->query($sql);
+			?>
+			<select name="jenis" class="form-select">
+			<?php while ($row = $query->fetch_assoc()) { ?>
+				<option value="<?=$row['id_mutasi'];?>"><?=$row['nama_mutasi'];?></option>
+			<?php } ?>
+			</select>
+		</div>
+	</div>
 </div>
-															<div class="modal-footer">
-																<button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-																<button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">Simpan
-																</button>
-															</div>
-								
+<div class="modal-footer">
+	<button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+	<button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">Simpan</button>
+</div>
+
 								
 

@@ -22,16 +22,16 @@ $output = array('data' => array());
 		$namasis=$pn['nama'];
 		
 		$actionButton = '
-				<button class="btn btn-outline-success btn-icon" data-smt="'.$smt.'" data-tapel="'.$tapel.'" data-siswa="'.$idp.'" data-bs-toggle="modal" data-bs-target="#info">
+				<button class="btn btn-outline-success btn-icon" data-smt="'.$smt.'" data-tapel="'.$tapel.'" data-siswa="'.$idp.'" data-bs-toggle="modal" data-bs-target="#info" data-bs-toggle="tooltip" title="Info Siswa">
 					<i class="fa fa-user"></i>
 				</button>
-				<a href="'.base_url().'edit-siswa/'.$idp.'" class="btn btn-outline-primary btn-icon">
+				<a href="'.base_url().'edit-siswa/'.$idp.'" data-bs-toggle="tooltip" title="Edit Siswa" class="btn btn-outline-primary btn-icon">
 					<i class="fa fa-pencil"></i>
 				</a>
-				<button class="btn btn-outline-info btn-icon" data-smt="'.$smt.'" data-tapel="'.$tapel.'" data-siswa="'.$idp.'" data-idsis="'.$idsw.'" data-bs-toggle="modal" data-bs-target="#tempatkan">
+				<button class="btn btn-outline-info btn-icon" data-smt="'.$smt.'" data-tapel="'.$tapel.'" data-siswa="'.$idp.'" data-idsis="'.$idsw.'" data-bs-toggle="modal" data-bs-toggle="tooltip" title="Tempatkan" data-bs-target="#tempatkan">
 					<i class="fa fa-times"></i>
 				</button>
-				<button class="btn btn-outline-danger btn-icon" data-smt="'.$smt.'" data-tapel="'.$tapel.'" data-siswa="'.$idp.'" data-idsis="'.$idsw.'" data-bs-toggle="modal" data-bs-target="#mutasikan">
+				<button class="btn btn-outline-danger btn-icon" data-smt="'.$smt.'" data-tapel="'.$tapel.'" data-siswa="'.$idp.'" data-idsis="'.$idsw.'" data-bs-toggle="modal" data-bs-target="#mutasikan" data-bs-toggle="tooltip" title="Mutasikan">
 					<i class="fa fa-times"></i>
 				</button>
 				';
