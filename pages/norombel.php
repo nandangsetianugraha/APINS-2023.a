@@ -18,7 +18,16 @@
 			<!-- END Header -->
 			<!-- BEGIN Page Content -->
 			<div class="content">
-				Belum ada Rombel
+				<div class="container-fluid g-5">
+					<div class="row g-0 align-items-center justify-content-center h-100">
+						<div class="col-md-8 col-lg-6 col-xl-4 text-center">
+							<h1 class="widget20"><img src="<?=base_url();?>assets/images/norombel.png"></h1>
+							<h2 class="mb-3">Kesalahan</h2>
+							<p class="mb-4">Anda belum ditempatkan di Rombel manapun!</p>
+							<a href="<?=base_url();?>" class="btn btn-label-primary btn-lg btn-widest">Kembali</a>
+						</div>
+					</div>
+				</div>
 			</div>
 			<!-- END Page Content -->
 			<!-- BEGIN Footer -->

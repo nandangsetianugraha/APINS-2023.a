@@ -24,7 +24,7 @@
 												<img src="assets/images/aljannah.png" alt="AI">
 											</span>
 										</div>
-										<h3>Aplikasi Penilaian dan Informasi Nilai Siswa</h3>
+										<h3>APINS versi <?=$versi;?></h3>
 										<!-- END Avatar -->
 									</div>
 									<!-- BEGIN Form -->
@@ -85,11 +85,11 @@
 												<!-- BEGIN Form Check -->
 												<div class="form-check form-switch">
 													<input class="form-check-input" type="checkbox" id="remember" name="remember">
-													<label class="form-check-label" for="remember">Remember me</label>
+													<label class="form-check-label" for="remember">Show/Hide Password</label>
 												</div>
 												<!-- END Form Check -->
 											</div>
-											<a href="javascript:void(0);">Forgot password?</a>
+											<a href="<?=base_url();?>lupa-password">Forgot password?</a>
 										</div>
 										<!-- END Flex -->
 										<!-- BEGIN Flex -->
@@ -115,6 +115,20 @@
 	<?php include "layout/script.php"; ?>
 	<script type="text/javascript" src="<?=base_url();?>assets/app/pages/pages/login.js"></script>
 	<script src="<?=base_url();?>pages/login.js"></script>
+  <script>
+	$(document).ready(function(){
+  
+   $('#remember').on('click', function(){
+      var passInput=$("#password");
+      if(passInput.attr('type')==='password')
+        {
+          passInput.attr('type','text');
+      }else{
+         passInput.attr('type','password');
+      }
+  })
+})
+	</script>
 </body>
 
 </html>

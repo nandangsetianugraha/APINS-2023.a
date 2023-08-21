@@ -300,7 +300,7 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
 		format: 'yyyy-mm-dd',
 		autoclose:true
 	});
-	$("#inputmask-2").inputmask({ mask: "9999999999999" });
+	$("#inputmask-2").inputmask({ mask: "999999999999" });
 	$("#dip").hide(); 
 	$("#dip2").show(); 
 	var idptk = $('#idpt').val();

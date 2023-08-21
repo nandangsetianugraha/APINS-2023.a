@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2023 at 09:30 AM
+-- Generation Time: Aug 21, 2023 at 04:17 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -93,6 +93,25 @@ INSERT INTO `agama` (`id_agama`, `nama_agama`) VALUES
 (5, 'Budha'),
 (6, 'Khong Hu Cu'),
 (99, 'Lain-lain');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `anak`
+--
+
+CREATE TABLE `anak` (
+  `id_anak` int(11) NOT NULL,
+  `ptk_id` varchar(36) NOT NULL,
+  `nama` varchar(200) NOT NULL,
+  `status` varchar(2) NOT NULL,
+  `jenjang` int(11) NOT NULL,
+  `nisn` varchar(10) NOT NULL,
+  `jk` varchar(1) NOT NULL,
+  `tempat_lahir` varchar(25) NOT NULL,
+  `tanggal_lahir` date NOT NULL,
+  `tahun_masuk` varchar(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -1307,6 +1326,32 @@ INSERT INTO `jenjang` (`kd_jenjang`, `nama_jenjang`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jenjang_pendidikan`
+--
+
+CREATE TABLE `jenjang_pendidikan` (
+  `id_jenjang` int(11) NOT NULL,
+  `nama_jenjang` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `jenjang_pendidikan`
+--
+
+INSERT INTO `jenjang_pendidikan` (`id_jenjang`, `nama_jenjang`) VALUES
+(0, 'Belum Sekolah'),
+(1, 'SD'),
+(2, 'SMP'),
+(3, 'SMA'),
+(4, 'D1'),
+(5, 'D2'),
+(6, 'D3'),
+(7, 'S1'),
+(8, 'S2');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jns_daftar`
 --
 
@@ -1750,7 +1795,7 @@ CREATE TABLE `konfigurasi` (
 --
 
 INSERT INTO `konfigurasi` (`id_conf`, `tapel`, `semester`, `maintenis`, `nama_sekolah`, `alamat_sekolah`, `image_login`, `versi`) VALUES
-(1, '2023/2024', 1, 0, 'SD Islam Al-Jannah', 'Jl. Raya Gabuswetan No. 1 Desa Gabuswetan Kec. Gabuswetan Indramayu', 'aljannah.png', '2023.a');
+(1, '2023/2024', 1, 0, 'SD Islam Al-Jannah', 'Jl. Raya Gabuswetan No. 1 Desa Gabuswetan Kec. Gabuswetan Indramayu', 'aljannah.png', '2023.c');
 
 -- --------------------------------------------------------
 
@@ -1813,6 +1858,13 @@ CREATE TABLE `loginattempts` (
   `Username` varchar(65) DEFAULT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `loginattempts`
+--
+
+INSERT INTO `loginattempts` (`IP`, `Attempts`, `LastLogin`, `Username`, `ID`) VALUES
+('::1', 3, '2023-08-18 08:37:34', 'faridah', 1);
 
 -- --------------------------------------------------------
 
@@ -2334,6 +2386,15 @@ CREATE TABLE `penempatan` (
   `smt` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `penempatan`
+--
+
+INSERT INTO `penempatan` (`id_rombel`, `peserta_didik_id`, `nama`, `rombel`, `tapel`, `smt`) VALUES
+(1, 'dg8gzm02-rzh9-w08a-9exv-1s5vyf0977me', 'Nandang Setia Nugraha', '2', '2023/2024', 1),
+(2, 'vb5mcryl-s4m8-hebu-q2tk-lj8ffftmuhx8', 'Nandang Setia Nugraha', '1', '2023/2024', 1),
+(3, 't4flcF9m-YoKR-lCL4-5dNo-6twUY0jRuCNH', 'Nandang Setia Nugraha', '2', '2023/2024', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -2356,7 +2417,7 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`id`, `ptk_id`, `username`, `password`, `nama_lengkap`, `level`, `verified`, `gambar`) VALUES
-(1, '009ab849-2cf5-e011-b7ae-9b859d73d4ca', 'faridah', '$2y$10$YxLGFgUrZWroKKe0fZnSKOe0WQYmChOH9MYkaL2zWRduNbSneyAGa', 'Nandang Setia Nugraha', 11, 1, 'avatar_1234914804.jpeg');
+(1, '009ab849-2cf5-e011-b7ae-9b859d73d4ca', 'admin', '$2y$10$YxLGFgUrZWroKKe0fZnSKOe0WQYmChOH9MYkaL2zWRduNbSneyAGa', 'Nandang Setia Nugraha', 11, 1, 'avatar_1234914804.jpeg');
 
 -- --------------------------------------------------------
 
@@ -2744,6 +2805,22 @@ INSERT INTO `rapor_akm` (`id_rapor`, `tahun`, `nilai_literasi`, `nilai_literasi_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `riwayat_pendidikan`
+--
+
+CREATE TABLE `riwayat_pendidikan` (
+  `id_riwayat` int(11) NOT NULL,
+  `ptk_id` varchar(36) NOT NULL,
+  `jenjang` int(11) NOT NULL,
+  `nama_jenjang` varchar(50) NOT NULL,
+  `fakultas` varchar(50) NOT NULL,
+  `tahun_masuk` varchar(4) NOT NULL,
+  `tahun_keluar` varchar(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rombel`
 --
 
@@ -2758,6 +2835,14 @@ CREATE TABLE `rombel` (
   `penjas` varchar(36) DEFAULT NULL,
   `inggris` varchar(36) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `rombel`
+--
+
+INSERT INTO `rombel` (`id_rombel`, `nama_rombel`, `kurikulum`, `tapel`, `wali_kelas`, `pendamping`, `pai`, `penjas`, `inggris`) VALUES
+(1, '1', 'Kurikulum Merdeka', '2023/2024', '009ab849-2cf5-e011-b7ae-9b859d73d4ca', '009ab849-2cf5-e011-b7ae-9b859d73d4ca', '009ab849-2cf5-e011-b7ae-9b859d73d4ca', '009ab849-2cf5-e011-b7ae-9b859d73d4ca', '009ab849-2cf5-e011-b7ae-9b859d73d4ca'),
+(2, '2', 'Kurikulum Merdeka', '2023/2024', '009ab849-2cf5-e011-b7ae-9b859d73d4ca', '009ab849-2cf5-e011-b7ae-9b859d73d4ca', '009ab849-2cf5-e011-b7ae-9b859d73d4ca', '009ab849-2cf5-e011-b7ae-9b859d73d4ca', '009ab849-2cf5-e011-b7ae-9b859d73d4ca');
 
 -- --------------------------------------------------------
 
@@ -2948,6 +3033,15 @@ CREATE TABLE `siswa` (
   `status` int(11) NOT NULL,
   `nasabah_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `siswa`
+--
+
+INSERT INTO `siswa` (`id`, `peserta_didik_id`, `nis`, `nisn`, `nama`, `jk`, `tempat`, `tanggal`, `nik`, `agama`, `pend_sebelum`, `alamat`, `nama_ayah`, `nama_ibu`, `no_wa`, `pek_ayah`, `pek_ibu`, `jalan`, `kelurahan`, `kecamatan`, `kabupaten`, `provinsi`, `avatar`, `status`, `nasabah_id`) VALUES
+(1, 'dg8gzm02-rzh9-w08a-9exv-1s5vyf0977me', '', '', 'Nandang Setia Nugraha', 'L', 'Indramayu', '2023-08-21', '', 1, '', 'Jl. Raya gabuswetan', '', '', '082214880179_', 1, 1, '', 'Pilih Desa/kelurahan', 'Pilih Kecamatan', 'Pilih Kabupaten', 'Pilih Provinsi', 'avatar.png', 1, '0'),
+(2, 'vb5mcryl-s4m8-hebu-q2tk-lj8ffftmuhx8', '', '', 'Nandang Setia Nugraha', 'L', 'Indramayu', '2023-08-02', '', 1, '', 'Jl. Raya gabuswetan', '', '', '082214880179_', 1, 1, '', 'Pilih Desa/kelurahan', 'Pilih Kecamatan', 'Pilih Kabupaten', 'Pilih Provinsi', 'avatar.png', 1, '0'),
+(3, 't4flcF9m-YoKR-lCL4-5dNo-6twUY0jRuCNH', '', '', 'Nandang Setia Nugraha', 'L', 'ki', '2023-08-01', '', 1, '', 'Jl. Raya gabuswetan', '', '', '082214880179_', 1, 1, '', 'Pilih Desa/kelurahan', 'Pilih Kecamatan', 'Pilih Kabupaten', 'Pilih Provinsi', 'avatar.png', 1, '0');
 
 -- --------------------------------------------------------
 
@@ -3270,8 +3364,7 @@ INSERT INTO `tapel` (`id_tapel`, `nama_tapel`) VALUES
 (15, '2021/2022'),
 (16, '2022/2023'),
 (17, '2023/2024'),
-(18, '2024/2025'),
-(19, '2025/2026');
+(18, '2024/2025');
 
 -- --------------------------------------------------------
 
@@ -3709,6 +3802,12 @@ ALTER TABLE `agama`
   ADD PRIMARY KEY (`id_agama`);
 
 --
+-- Indexes for table `anak`
+--
+ALTER TABLE `anak`
+  ADD PRIMARY KEY (`id_anak`);
+
+--
 -- Indexes for table `arbain`
 --
 ALTER TABLE `arbain`
@@ -3937,6 +4036,12 @@ ALTER TABLE `jenis_tunggakan`
 --
 ALTER TABLE `jenjang`
   ADD PRIMARY KEY (`kd_jenjang`);
+
+--
+-- Indexes for table `jenjang_pendidikan`
+--
+ALTER TABLE `jenjang_pendidikan`
+  ADD PRIMARY KEY (`id_jenjang`);
 
 --
 -- Indexes for table `jns_daftar`
@@ -4350,6 +4455,12 @@ ALTER TABLE `rapor_akm`
   ADD PRIMARY KEY (`id_rapor`);
 
 --
+-- Indexes for table `riwayat_pendidikan`
+--
+ALTER TABLE `riwayat_pendidikan`
+  ADD PRIMARY KEY (`id_riwayat`);
+
+--
 -- Indexes for table `rombel`
 --
 ALTER TABLE `rombel`
@@ -4661,6 +4772,12 @@ ALTER TABLE `absen_config`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `anak`
+--
+ALTER TABLE `anak`
+  MODIFY `id_anak` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `arbain`
 --
 ALTER TABLE `arbain`
@@ -4865,6 +4982,12 @@ ALTER TABLE `jenis_tunggakan`
   MODIFY `id_tunggakan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `jenjang_pendidikan`
+--
+ALTER TABLE `jenjang_pendidikan`
+  MODIFY `id_jenjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `juzamma`
 --
 ALTER TABLE `juzamma`
@@ -4946,7 +5069,7 @@ ALTER TABLE `log`
 -- AUTO_INCREMENT for table `loginattempts`
 --
 ALTER TABLE `loginattempts`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `maintenance`
@@ -5096,7 +5219,7 @@ ALTER TABLE `pend_terakhir`
 -- AUTO_INCREMENT for table `penempatan`
 --
 ALTER TABLE `penempatan`
-  MODIFY `id_rombel` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rombel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pengguna`
@@ -5195,10 +5318,16 @@ ALTER TABLE `rapor_akm`
   MODIFY `id_rapor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `riwayat_pendidikan`
+--
+ALTER TABLE `riwayat_pendidikan`
+  MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `rombel`
 --
 ALTER TABLE `rombel`
-  MODIFY `id_rombel` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rombel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `saran`
@@ -5240,7 +5369,7 @@ ALTER TABLE `sikap`
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `sk`

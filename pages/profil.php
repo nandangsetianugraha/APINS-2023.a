@@ -1,4 +1,4 @@
-<?php $data="Edit PTK";?>
+<?php $data="Profil";?>
 <?php include "layout/head.php"; 
 $bln=isset($_GET['bln']) ? $_GET['bln'] : date("m");
 $thn=isset($_GET['thn']) ? $_GET['thn'] : date("Y");
@@ -28,17 +28,9 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
 					<div class="row">
 						<div class="col-12">
 							<!-- BEGIN Portlet -->
-							<?php if($level<>11){ ?>
-							<div class="alert alert-outline-secondary">
-								<div class="alert-icon">
-									<i class="fa fa-wrench"></i>
-								</div>
-								<div class="alert-content">Hanya Admin!!</div>
-							</div>
-							<?php }else{ ?>
+							
 							<?php 
-							if($tipe==''){}else{
-								$idptk=$tipe;
+								$idptk=$_SESSION['userid'];
 								$infoptk = $connect->query("select * from ptk where ptk_id='$idptk'")->fetch_assoc();
 								$idjns = $infoptk['jenis_ptk_id'];
 								$jenis = $connect->query("select * from jenis_ptk where jenis_ptk_id='$idjns'")->fetch_assoc();
@@ -69,16 +61,24 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
 												<div class="portlet-body">
 													<nav class="mb-3">
 														<!-- BEGIN Nav -->
-														<div class="nav nav-tabs" id="nav3-tab">
-															<a class="nav-item nav-link active" id="nav3-home-tab" data-bs-toggle="tab" href="#nav3-home">Biodata</a>
-															<a class="nav-item nav-link" id="nav3-profile-tab" data-bs-toggle="tab" href="#nav3-profile">Riwayat Pendidikan</a>
-															<a class="nav-item nav-link" id="nav3-contact-tab" data-bs-toggle="tab" href="#nav3-contact">Keluarga</a>
-														</div>
+														<ul class="nav nav-tabs">
+															<li class="nav-item">
+																<a class="nav-link <?php if($tipe=='' or $tipe=='biodata'){ echo "active";} ?>" href="<?=base_url();?>profil/biodata">Biodata</a>
+																<input type="hidden" class="form-control" name="ptkid" id="idpt" value="<?=$infoptk['ptk_id'];?>">
+															</li>
+															<li class="nav-item">
+																<a class="nav-link <?php if($tipe=='pendidikan'){ echo "active";} ?>" href="<?=base_url();?>profil/pendidikan">Riwayat Pendidikan</a>
+															</li>
+															<li class="nav-item">
+																<a class="nav-link <?php if($tipe=='anak'){ echo "active";} ?>" href="<?=base_url();?>profil/anak">Keluarga</a>
+															</li>
+															
+														</ul>
+														
 														<!-- END Nav -->
 													</nav>
-													<div class="tab-content" id="nav3-tabContent">
-														<div class="tab-pane fade show active" id="nav3-home">
-															<form class="row g-3" action="../modul/kepegawaian/update-biodata.php" autocomplete="off" method="POST" id="ubahForm">
+													<?php if($tipe=='' or $tipe=='biodata'){ ?>
+														<form class="row g-3" action="<?=base_url();?>modul/kepegawaian/update-biodata.php" autocomplete="off" method="POST" id="ubahForm">
 																<div class="col-6">
 																	<label for="inputAddress" class="form-label">Nama Lengkap</label>
 																	<input type="text" class="form-control" name="nama" value="<?=$infoptk['nama'];?>">
@@ -170,14 +170,14 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
 																</div>
 																<div class="row">
 																	<div class="col-md-12 text-end mt-3">
-																		<a href="../daftar-ptk" class="btn btn-danger">Kembali</a>
+																		<a href="daftar-ptk" class="btn btn-danger">Kembali</a>
 																		<button type="submit" class="btn btn-primary">Simpan</button>
 																	</div>
 																</div>
 															</form>
-														</div>
-														<div class="tab-pane fade" id="nav3-profile">
-															<button class="btn btn-effect-ripple btn-xs btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#tambahriwayat"><i class="fa fa-plus"></i> Riwayat Pendidikan</button>
+													<?php } ?>
+													<?php if($tipe=='pendidikan'){ ?>
+														<button class="btn btn-effect-ripple btn-xs btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#tambahriwayat"><i class="fa fa-plus"></i> Riwayat Pendidikan</button>
 															<table id="pendidikan-1" class="table table-bordered table-striped table-hover">
 																<thead>
 																	<tr>
@@ -190,9 +190,9 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
 																	</tr>
 																</thead>
 															</table>
-														</div>
-														<div class="tab-pane fade" id="nav3-contact">
-															<button class="btn btn-effect-ripple btn-xs btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#tambahanak"><i class="fa fa-plus"></i> Nama Anak</button>
+													<?php } ?>
+													<?php if($tipe=='anak'){ ?>
+														<button class="btn btn-effect-ripple btn-xs btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#tambahanak"><i class="fa fa-plus"></i> Nama Anak</button>
 															<table id="anak-1" class="table table-bordered table-striped table-hover">
 																<thead>
 																	<tr>
@@ -207,8 +207,7 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
 																	</tr>
 																</thead>
 															</table>
-														</div>
-													</div>
+													<?php } ?>
 													
 												</div>
 											</div>
@@ -216,7 +215,7 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
 									</div>
 								</div>
 							</div>
-							<?php }} ?>
+							
 							<!-- END Portlet -->
 						</div>
 					</div>
@@ -234,7 +233,7 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
 	<div class="modal fade" id="tambahriwayat">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form id="tambahriwayatform" method="POST" action="../modul/kepegawaian/tambah-pendidikan.php" class="form" autocomplete="off">
+				<form id="tambahriwayatform" method="POST" action="<?=base_url();?>modul/kepegawaian/tambah-pendidikan.php" class="form" autocomplete="off">
 				<div class="fetched-data"></div>
 				</form>
 			</div>
@@ -243,7 +242,7 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
 	<div class="modal fade" id="tambahanak">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form id="tambahanakform" method="POST" action="../modul/kepegawaian/tambah-anak.php" class="form" autocomplete="off">
+				<form id="tambahanakform" method="POST" action="<?=base_url();?>modul/kepegawaian/tambah-anak.php" class="form" autocomplete="off">
 				<div class="fetched-data"></div>
 				</form>
 			</div>
@@ -252,7 +251,7 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
 	<div class="modal fade" id="tambah-pengguna">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form class="form-horizontal" action="modul/kepegawaian/add-user.php" autocomplete="off" method="POST" id="adduser">
+				<form class="form-horizontal" action="<?=base_url();?>modul/kepegawaian/add-user.php" autocomplete="off" method="POST" id="adduser">
 				<div class="fetched-data1"></div>
 				</form>
 			</div>
@@ -371,14 +370,14 @@ $('#upload_image').on('change', function(){
 			"searching": true,
 			"paging":true,
 			"responsive":true,
-			"ajax": "../modul/kepegawaian/daftar-riwayat.php?idptk="+idptk
+			"ajax": "<?=base_url();?>modul/kepegawaian/daftar-riwayat.php?idptk="+idptk
 		});
 		TabelAnak = $("#anak-1").DataTable({ 
 			"destroy":true,
 			"searching": true,
 			"paging":true,
 			"responsive":true,
-			"ajax": "../modul/kepegawaian/daftar-anak.php?idptk="+idptk
+			"ajax": "<?=base_url();?>modul/kepegawaian/daftar-anak.php?idptk="+idptk
 		});
 		$("#tambahriwayatform").unbind('submit').bind('submit', function() {
 			var form = $(this);
@@ -409,7 +408,7 @@ $('#upload_image').on('change', function(){
 			//menggunakan fungsi ajax untuk pengambilan data
 			$.ajax({
 				type : 'post',
-				url : '../modul/kepegawaian/m_riwayat.php',
+				url : '<?=base_url();?>modul/kepegawaian/m_riwayat.php',
 				data :  'idptk='+ idptk,
 				beforeSend: function()
 				{	
@@ -430,7 +429,7 @@ $('#upload_image').on('change', function(){
 			//menggunakan fungsi ajax untuk pengambilan data
 			$.ajax({
 				type : 'post',
-				url : '../modul/kepegawaian/m_anak.php',
+				url : '<?=base_url();?>modul/kepegawaian/m_anak.php',
 				data :  'idptk='+ idptk,
 				beforeSend: function()
 				{	
@@ -466,6 +465,78 @@ $('#upload_image').on('change', function(){
 			}); // ajax subit 				
 			return false;
 		}); // /submit form for create member
+		function removeRiwayat(id = null) {
+			if(id) {
+				// click on remove button
+				
+				Swal.fire({
+				  title: 'Yakin dihapus?',
+				  text: "Apakah anda yakin menghapus Riwayat Pendidikan ini?",
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Ya, Hapus!'
+				}).then((result) => {
+				  if (result.isConfirmed) {
+					$.ajax({
+							url: '<?=base_url();?>modul/kepegawaian/hapus-riwayat.php',
+							type: 'post',
+							data: {member_id : id},
+							dataType: 'json',
+							success:function(response) {
+								if(response.success == true) {						
+									// refresh the table
+									toastr.success(response.messages);
+									TabelRiwayat.ajax.reload(null, false);
+								} else {
+									toastr.error(response.messages);
+								}
+							}
+						});
+				  }
+				})
+				
+			} else {
+				Swal.fire("Kesalahan","Error Sistem","error");
+			}
+		}
+		function removeAnak(id = null) {
+			if(id) {
+				// click on remove button
+				
+				Swal.fire({
+				  title: 'Yakin dihapus?',
+				  text: "Apakah anda yakin menghapus Data Anak ini?",
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Ya, Hapus!'
+				}).then((result) => {
+				  if (result.isConfirmed) {
+					$.ajax({
+							url: '<?=base_url();?>modul/kepegawaian/hapus-anak.php',
+							type: 'post',
+							data: {member_id : id},
+							dataType: 'json',
+							success:function(response) {
+								if(response.success == true) {						
+									// refresh the table
+									toastr.success(response.messages);
+									TabelRiwayat.ajax.reload(null, false);
+								} else {
+									toastr.error(response.messages);
+								}
+							}
+						});
+				  }
+				})
+				
+			} else {
+				Swal.fire("Kesalahan","Error Sistem","error");
+			}
+		}
 	</script>
 </body>
 </html>

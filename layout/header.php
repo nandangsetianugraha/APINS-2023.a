@@ -130,7 +130,7 @@
 												<!-- BEGIN Grid Nav -->
 												<div class="grid-nav grid-nav-flush grid-nav-action grid-nav-no-rounded">
 													<div class="grid-nav-row">
-														<a href="#" class="grid-nav-item">
+														<a href="<?=base_url();?>profil" class="grid-nav-item">
 															<div class="grid-nav-icon">
 																<i class="far fa-address-card"></i>
 															</div>
@@ -279,7 +279,7 @@
 												<!-- BEGIN Grid Nav -->
 												<div class="grid-nav grid-nav-flush grid-nav-action grid-nav-no-rounded">
 													<div class="grid-nav-row">
-														<a href="#" class="grid-nav-item">
+														<a href="<?=base_url();?>profil" class="grid-nav-item">
 															<div class="grid-nav-icon">
 																<i class="far fa-address-card"></i>
 															</div>

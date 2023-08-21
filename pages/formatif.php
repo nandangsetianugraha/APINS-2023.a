@@ -90,19 +90,19 @@
 								</div>
 								<div class="portlet-body">
 									<form class="row g-3">
-										<div class="col-md-6">
+										<div class="col-md-6 mb-2">
 											<label for="inputEmail4" class="form-label">Mata Pelajaran</label>
 											<select id="mp" name="mp" class="form-select">
 												<option value="0">Pilih Mapel</option>
 											</select>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-6 mb-2">
 											<label for="inputEmail4" class="form-label">Materi</label>
 											<select id="materi" name="materi" class="form-select">
 												<option value="0">Pilih Materi</option>
 											</select>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-12 mb-2">
 											<label for="inputEmail4" class="form-label">Tujuan Pembelajaran</label>
 											<select id="tpem" name="tpem" class="form-select">
 												<option value="0">Pilih Tujuan Pembelajaran</option>

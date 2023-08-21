@@ -3,13 +3,19 @@ session_start();
 date_default_timezone_set('Asia/Jakarta');
 $request  = $_SERVER['REQUEST_URI'];
 $params     = explode("/", $request);
-$halaman = $params[3];
-$tipe = count($params)>4 ? $params[4] : '';
-$act = count($params)>5 ? $params[5] : '';
+$halaman = $params[1];
+$tipe = count($params)>2 ? $params[2] : '';
+$act = count($params)>3 ? $params[3] : '';
 include 'config/config.php';
 include 'config/db_connect.php';
 if (!isset($_SESSION['userid'])) {
-	include "pages/login.php";
+	if($halaman==="lupa-password"){
+		include "pages/lupa-password.php";
+	}elseif($halaman==="otp"){
+		include "pages/otp.php";
+	}else{
+		include "pages/login.php";
+	}
 }else{
   	include 'config/session.php';
   	$kurikulum=$_SESSION['kurikulum'];
