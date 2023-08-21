@@ -100,6 +100,39 @@
                       	
 					</div>
 					<?php } ?>
+					<div class="menu-section">
+						<div class="menu-section-icon">
+							<i class="fa fa-ellipsis-h"></i>
+						</div>
+						<h2 class="menu-section-text">File Manager</h2>
+					</div>
+					<div class="menu-item">
+						<button class="menu-item-link menu-item-toggle">
+							<div class="menu-item-icon">
+								<i class="fa fa-palette"></i>
+							</div>
+							<span class="menu-item-text">Dokumen</span>
+							<div class="menu-item-addon">
+								<i class="menu-item-caret caret"></i>
+							</div>
+						</button>
+						<!-- BEGIN Menu Submenu -->
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="<?=base_url();?>upload-dokumen" data-menu-path="<?=base_url();?>" class="menu-item-link">
+									<i class="menu-item-bullet"></i>
+									<span class="menu-item-text">Upload Dokumen Baru</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="<?=base_url();?>daftar-dokumen" data-menu-path="<?=base_url();?>" class="menu-item-link">
+									<i class="menu-item-bullet"></i>
+									<span class="menu-item-text">Daftar Dokumen</span>
+								</a>
+							</div>	
+						</div>
+						<!-- END Menu Submenu -->
+					</div>
 					<?php if($level==11 or $level==98 or $level==97) { ?>
 					<!-- BEGIN Menu Section -->
 					<div class="menu-section">
