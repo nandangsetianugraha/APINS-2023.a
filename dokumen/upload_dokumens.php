@@ -56,7 +56,8 @@ if(isset($_POST['idptk']) || isset($_POST['judul']) || isset($_POST['files'])){
                 }  
             }  
         }else{
-			$uploadStatus = 0;  
+			$response['status'] = 0; 
+            $response['message'] = 'Dokumen empty'; 
 		}			
          
         if($uploadStatus == 1){ 

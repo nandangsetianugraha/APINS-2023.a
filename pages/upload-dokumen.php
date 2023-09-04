@@ -30,9 +30,8 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
 							<div class="portlet" id="status">
 								
 								<div class="portlet-body">
-									<div class="statusMsg"></div>
 									<!-- BEGIN Datatable -->
-									<div class="row mb-2">
+									<div class="row mb-2" id="status">
 									<div class="col-lg-12">
 										<form id="fupForm" enctype="multipart/form-data" autocomplete="off">
 											<div class="form-group mb-2">
@@ -138,6 +137,9 @@ $(document).ready(function(){
 			"ajax": "modul/dokumen/daftar-dokumen.php?ptkid="+ptkid
 		});
 		<?php } ?>
+  	setInterval(function() {
+          TabelRombel.ajax.reload(null, false);
+		}, 20000);
     // Submit form data via Ajax
     $("#fupForm").on('submit', function(e){
         e.preventDefault();
@@ -152,14 +154,18 @@ $(document).ready(function(){
             beforeSend: function(){
                 $('.submitBtn').attr("disabled","disabled");
                 $('#fupForm').css("opacity",".5");
+              	$('#status').block({ message: '\n<div class="spinner-grow text-success"></div>\n<h1 class="blockui blockui-title">Tunggu sebentar...</h1>\n'});
             },
             success: function(response){
-                $('.statusMsg').html('');
+                $('#status').unblock();
                 if(response.status == 1){
                     $('#fupForm')[0].reset();
-                    $('.statusMsg').html('<p class="alert alert-success">'+response.message+'</p>');
+                  	toastr.success(response.message);
+                  	
+                    //$('.statusMsg').html('<p class="alert alert-success">'+response.message+'</p>');
                 }else{
-                    $('.statusMsg').html('<p class="alert alert-danger">'+response.message+'</p>');
+                  	toastr.error(response.message);
+                   // $('.statusMsg').html('<p class="alert alert-danger">'+response.message+'</p>');
                 }
                 $('#fupForm').css("opacity","");
                 $(".submitBtn").removeAttr("disabled");
